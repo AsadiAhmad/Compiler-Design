@@ -1,0 +1,4242 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    BREAK
+    CASE
+    CONTINUE
+    DEFAULT
+    DO
+    DOLLAR_SIGN
+    ENUM
+    FOR
+    ID_ERROR
+    IMPORT
+    LOGICAL_NOT
+    MAIN
+    NOT_EQUAL_OP
+    NULL
+    NUM_ERROR
+    OR
+    PRINT
+    PRINTLN
+    PROTECTED
+    SWITCH
+    THEN
+    extends
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> class_declaration
+Rule 2     class_declaration -> CLASS ID LEFT_BRACE list RIGHT_BRACE
+Rule 3     list -> declration_list list
+Rule 4     list -> empty
+Rule 5     declration_list -> field_declaration
+Rule 6     declration_list -> method_declaration
+Rule 7     field_declaration -> declarators ID SEMICOLON
+Rule 8     method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+Rule 9     inside_method_exp -> parameter_list
+Rule 10    inside_method_exp -> empty
+Rule 11    inside_method_st -> statment_exist return_exist
+Rule 12    statment_exist -> statment_loop
+Rule 13    statment_exist -> empty
+Rule 14    return_exist -> RETURN expresstion SEMICOLON
+Rule 15    return_exist -> empty
+Rule 16    declarators -> declare_type_exist static_exist type
+Rule 17    declare_type_exist -> declare_type
+Rule 18    declare_type_exist -> empty
+Rule 19    declare_type -> PUBLIC
+Rule 20    declare_type -> PRIVATE
+Rule 21    static_exist -> STATIC
+Rule 22    static_exist -> empty
+Rule 23    type -> prim_type
+Rule 24    type -> class_type
+Rule 25    type -> arr_type
+Rule 26    prim_type -> INT
+Rule 27    prim_type -> BOOLEAN
+Rule 28    prim_type -> DOUBLE
+Rule 29    prim_type -> FLOAT
+Rule 30    prim_type -> STRING
+Rule 31    prim_type -> CHAR
+Rule 32    prim_type -> VOID
+Rule 33    class_type -> ID
+Rule 34    arr_type -> arr_typed LBRACKET RBRACKET
+Rule 35    arr_type -> arr_typed LBRACKET NUMBER RBRACKET
+Rule 36    arr_typed -> INT
+Rule 37    arr_typed -> class_type
+Rule 38    parameter_list -> type ID inputt
+Rule 39    inputt -> input inputt
+Rule 40    inputt -> empty
+Rule 41    input -> COMMAS type ID
+Rule 42    statment_loop -> statment statment_loop
+Rule 43    statment_loop -> statment
+Rule 44    statment -> if_statment
+Rule 45    statment -> while_statment
+Rule 46    statment -> declare_var
+Rule 47    statment -> call_function
+Rule 48    statment -> define_arr
+Rule 49    statment -> assign
+Rule 50    assign -> ID EQUAL_OP expresstion SEMICOLON
+Rule 51    if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+Rule 52    if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+Rule 53    if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+Rule 54    if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+Rule 55    while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+Rule 56    while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+Rule 57    declare_var -> type ID EQUAL_OP expresstion SEMICOLON
+Rule 58    reference -> half_reference exist_id
+Rule 59    half_reference -> THIS
+Rule 60    half_reference -> ID
+Rule 61    exist_id -> id_loop
+Rule 62    exist_id -> empty
+Rule 63    id_loop -> DOT ID reference
+Rule 64    id_loop -> empty
+Rule 65    argument_exist -> argument_list
+Rule 66    argument_exist -> empty
+Rule 67    argument_list -> expresstion argument_list_exist
+Rule 68    argument_list_exist -> argument_list_loop
+Rule 69    argument_list_exist -> empty
+Rule 70    argument_list_loop -> COMMAS expresstion argument_list_loop
+Rule 71    argument_list_loop -> empty
+Rule 72    call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+Rule 73    exist_expresstion -> <empty>
+Rule 74    define_arr -> reference exist_exp_arr expresstion SEMICOLON
+Rule 75    exist_exp_arr -> exp_arr
+Rule 76    exist_exp_arr -> empty
+Rule 77    exp_arr -> LBRACKET expresstion RBRACKET
+Rule 78    binop -> PLUS
+Rule 79    binop -> MINUS
+Rule 80    binop -> TIMES
+Rule 81    binop -> DIVIDE
+Rule 82    binop -> MODULUS
+Rule 83    binop -> ASSIGN_OP
+Rule 84    binop -> LOGICAL_AND
+Rule 85    binop -> LOGICAL_OR
+Rule 86    binop -> GREATER_THAN
+Rule 87    binop -> LESS_THAN
+Rule 88    binop -> GREATER_THAN_OR_EQUAL_TO
+Rule 89    binop -> LESS_THAN_OR_EQUAL_TO
+Rule 90    unop -> MINUS
+Rule 91    anop -> DECREMENT
+Rule 92    anop -> INCREMENT
+Rule 93    expresstion -> reference exist_exp_arr expresstion
+Rule 94    expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR
+Rule 95    expresstion -> OPEN_PAR expresstion CLOSE_PAR
+Rule 96    expresstion -> NUMBER
+Rule 97    expresstion -> ID
+Rule 98    expresstion -> TRUE_BOOOLEAN
+Rule 99    expresstion -> FALSE_BOOLEAN
+Rule 100   expresstion -> INT LBRACKET expresstion RBRACKET
+Rule 101   expresstion -> ID LBRACKET expresstion RBRACKET
+Rule 102   expresstion -> expresstion binop expresstion
+Rule 103   expresstion -> unop expresstion
+Rule 104   expresstion -> expresstion anop
+Rule 105   expresstion -> NEW ID OPEN_PAR CLOSE_PAR
+Rule 106   empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 
+ASSIGN_OP            : 83
+BOOLEAN              : 27
+BREAK                : 
+CASE                 : 
+CHAR                 : 31
+CLASS                : 2
+CLOSE_PAR            : 8 51 52 53 54 55 56 72 94 95 105
+COMMAS               : 41 70
+CONTINUE             : 
+DECREMENT            : 91
+DEFAULT              : 
+DIVIDE               : 81
+DO                   : 
+DOLLAR_SIGN          : 
+DOT                  : 63
+DOUBLE               : 28
+ELSE                 : 52 54
+ENUM                 : 
+EQUAL_OP             : 50 57
+FALSE_BOOLEAN        : 99
+FLOAT                : 29
+FOR                  : 
+GREATER_THAN         : 86
+GREATER_THAN_OR_EQUAL_TO : 88
+ID                   : 2 7 8 33 38 41 50 57 60 63 97 101 105
+ID_ERROR             : 
+IF                   : 51 52 53 54
+IMPORT               : 
+INCREMENT            : 92
+INT                  : 26 36 100
+LBRACKET             : 34 35 77 100 101
+LEFT_BRACE           : 2 8 51 52 52 56
+LESS_THAN            : 87
+LESS_THAN_OR_EQUAL_TO : 89
+LOGICAL_AND          : 84
+LOGICAL_NOT          : 
+LOGICAL_OR           : 85
+MAIN                 : 
+MINUS                : 79 90
+MODULUS              : 82
+NEW                  : 105
+NOT_EQUAL_OP         : 
+NULL                 : 
+NUMBER               : 35 96
+NUM_ERROR            : 
+OPEN_PAR             : 8 51 52 53 54 55 56 72 94 95 105
+OR                   : 
+PLUS                 : 78
+PRINT                : 
+PRINTLN              : 
+PRIVATE              : 20
+PROTECTED            : 
+PUBLIC               : 19
+RBRACKET             : 34 35 77 100 101
+RETURN               : 14
+RIGHT_BRACE          : 2 8 51 52 52 56
+SEMICOLON            : 7 14 50 57 72 74
+STATIC               : 21
+STRING               : 30
+SWITCH               : 
+THEN                 : 
+THIS                 : 59
+TIMES                : 80
+TRUE_BOOOLEAN        : 98
+VOID                 : 32
+WHILE                : 55 56
+error                : 
+extends              : 
+
+Nonterminals, with rules where they appear
+
+anop                 : 104
+argument_exist       : 72 94
+argument_list        : 65
+argument_list_exist  : 67
+argument_list_loop   : 68 70
+arr_type             : 25
+arr_typed            : 34 35
+assign               : 49
+binop                : 102
+call_function        : 47
+class_declaration    : 1
+class_type           : 24 37
+declarators          : 7 8
+declare_type         : 17
+declare_type_exist   : 16
+declare_var          : 46
+declration_list      : 3
+define_arr           : 48
+empty                : 4 10 13 15 18 22 40 62 64 66 69 71 76
+exist_exp_arr        : 74 93
+exist_expresstion    : 
+exist_id             : 58
+exp_arr              : 75
+expresstion          : 14 50 51 52 53 54 55 56 57 67 70 74 77 93 95 100 101 102 102 103 104
+field_declaration    : 5
+half_reference       : 58
+id_loop              : 61
+if_statment          : 44
+input                : 39
+inputt               : 38 39
+inside_method_exp    : 8
+inside_method_st     : 8
+list                 : 2 3
+method_declaration   : 6
+parameter_list       : 9
+prim_type            : 23
+program              : 0
+reference            : 63 72 74 93 94
+return_exist         : 11
+static_exist         : 16
+statment             : 42 43
+statment_exist       : 11
+statment_loop        : 12 42 51 52 52 53 54 54 55 56
+type                 : 16 38 41 57
+unop                 : 103
+while_statment       : 45
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . class_declaration
+    (2) class_declaration -> . CLASS ID LEFT_BRACE list RIGHT_BRACE
+
+    CLASS           shift and go to state 3
+
+    program                        shift and go to state 1
+    class_declaration              shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> class_declaration .
+
+    $end            reduce using rule 1 (program -> class_declaration .)
+
+
+state 3
+
+    (2) class_declaration -> CLASS . ID LEFT_BRACE list RIGHT_BRACE
+
+    ID              shift and go to state 4
+
+
+state 4
+
+    (2) class_declaration -> CLASS ID . LEFT_BRACE list RIGHT_BRACE
+
+    LEFT_BRACE      shift and go to state 5
+
+
+state 5
+
+    (2) class_declaration -> CLASS ID LEFT_BRACE . list RIGHT_BRACE
+    (3) list -> . declration_list list
+    (4) list -> . empty
+    (5) declration_list -> . field_declaration
+    (6) declration_list -> . method_declaration
+    (106) empty -> .
+    (7) field_declaration -> . declarators ID SEMICOLON
+    (8) method_declaration -> . declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+    (16) declarators -> . declare_type_exist static_exist type
+    (17) declare_type_exist -> . declare_type
+    (18) declare_type_exist -> . empty
+    (19) declare_type -> . PUBLIC
+    (20) declare_type -> . PRIVATE
+
+    RIGHT_BRACE     reduce using rule 106 (empty -> .)
+    STATIC          reduce using rule 106 (empty -> .)
+    INT             reduce using rule 106 (empty -> .)
+    BOOLEAN         reduce using rule 106 (empty -> .)
+    DOUBLE          reduce using rule 106 (empty -> .)
+    FLOAT           reduce using rule 106 (empty -> .)
+    STRING          reduce using rule 106 (empty -> .)
+    CHAR            reduce using rule 106 (empty -> .)
+    VOID            reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+    PUBLIC          shift and go to state 14
+    PRIVATE         shift and go to state 15
+
+    list                           shift and go to state 6
+    declration_list                shift and go to state 7
+    empty                          shift and go to state 8
+    field_declaration              shift and go to state 9
+    method_declaration             shift and go to state 10
+    declarators                    shift and go to state 11
+    declare_type_exist             shift and go to state 12
+    declare_type                   shift and go to state 13
+
+state 6
+
+    (2) class_declaration -> CLASS ID LEFT_BRACE list . RIGHT_BRACE
+
+    RIGHT_BRACE     shift and go to state 16
+
+
+state 7
+
+    (3) list -> declration_list . list
+    (3) list -> . declration_list list
+    (4) list -> . empty
+    (5) declration_list -> . field_declaration
+    (6) declration_list -> . method_declaration
+    (106) empty -> .
+    (7) field_declaration -> . declarators ID SEMICOLON
+    (8) method_declaration -> . declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+    (16) declarators -> . declare_type_exist static_exist type
+    (17) declare_type_exist -> . declare_type
+    (18) declare_type_exist -> . empty
+    (19) declare_type -> . PUBLIC
+    (20) declare_type -> . PRIVATE
+
+    RIGHT_BRACE     reduce using rule 106 (empty -> .)
+    STATIC          reduce using rule 106 (empty -> .)
+    INT             reduce using rule 106 (empty -> .)
+    BOOLEAN         reduce using rule 106 (empty -> .)
+    DOUBLE          reduce using rule 106 (empty -> .)
+    FLOAT           reduce using rule 106 (empty -> .)
+    STRING          reduce using rule 106 (empty -> .)
+    CHAR            reduce using rule 106 (empty -> .)
+    VOID            reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+    PUBLIC          shift and go to state 14
+    PRIVATE         shift and go to state 15
+
+    declration_list                shift and go to state 7
+    list                           shift and go to state 17
+    empty                          shift and go to state 8
+    field_declaration              shift and go to state 9
+    method_declaration             shift and go to state 10
+    declarators                    shift and go to state 11
+    declare_type_exist             shift and go to state 12
+    declare_type                   shift and go to state 13
+
+state 8
+
+    (4) list -> empty .
+    (18) declare_type_exist -> empty .
+
+    RIGHT_BRACE     reduce using rule 4 (list -> empty .)
+    STATIC          reduce using rule 18 (declare_type_exist -> empty .)
+    INT             reduce using rule 18 (declare_type_exist -> empty .)
+    BOOLEAN         reduce using rule 18 (declare_type_exist -> empty .)
+    DOUBLE          reduce using rule 18 (declare_type_exist -> empty .)
+    FLOAT           reduce using rule 18 (declare_type_exist -> empty .)
+    STRING          reduce using rule 18 (declare_type_exist -> empty .)
+    CHAR            reduce using rule 18 (declare_type_exist -> empty .)
+    VOID            reduce using rule 18 (declare_type_exist -> empty .)
+    ID              reduce using rule 18 (declare_type_exist -> empty .)
+
+
+state 9
+
+    (5) declration_list -> field_declaration .
+
+    PUBLIC          reduce using rule 5 (declration_list -> field_declaration .)
+    PRIVATE         reduce using rule 5 (declration_list -> field_declaration .)
+    STATIC          reduce using rule 5 (declration_list -> field_declaration .)
+    INT             reduce using rule 5 (declration_list -> field_declaration .)
+    BOOLEAN         reduce using rule 5 (declration_list -> field_declaration .)
+    DOUBLE          reduce using rule 5 (declration_list -> field_declaration .)
+    FLOAT           reduce using rule 5 (declration_list -> field_declaration .)
+    STRING          reduce using rule 5 (declration_list -> field_declaration .)
+    CHAR            reduce using rule 5 (declration_list -> field_declaration .)
+    VOID            reduce using rule 5 (declration_list -> field_declaration .)
+    ID              reduce using rule 5 (declration_list -> field_declaration .)
+    RIGHT_BRACE     reduce using rule 5 (declration_list -> field_declaration .)
+
+
+state 10
+
+    (6) declration_list -> method_declaration .
+
+    PUBLIC          reduce using rule 6 (declration_list -> method_declaration .)
+    PRIVATE         reduce using rule 6 (declration_list -> method_declaration .)
+    STATIC          reduce using rule 6 (declration_list -> method_declaration .)
+    INT             reduce using rule 6 (declration_list -> method_declaration .)
+    BOOLEAN         reduce using rule 6 (declration_list -> method_declaration .)
+    DOUBLE          reduce using rule 6 (declration_list -> method_declaration .)
+    FLOAT           reduce using rule 6 (declration_list -> method_declaration .)
+    STRING          reduce using rule 6 (declration_list -> method_declaration .)
+    CHAR            reduce using rule 6 (declration_list -> method_declaration .)
+    VOID            reduce using rule 6 (declration_list -> method_declaration .)
+    ID              reduce using rule 6 (declration_list -> method_declaration .)
+    RIGHT_BRACE     reduce using rule 6 (declration_list -> method_declaration .)
+
+
+state 11
+
+    (7) field_declaration -> declarators . ID SEMICOLON
+    (8) method_declaration -> declarators . ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+
+    ID              shift and go to state 18
+
+
+state 12
+
+    (16) declarators -> declare_type_exist . static_exist type
+    (21) static_exist -> . STATIC
+    (22) static_exist -> . empty
+    (106) empty -> .
+
+    STATIC          shift and go to state 20
+    INT             reduce using rule 106 (empty -> .)
+    BOOLEAN         reduce using rule 106 (empty -> .)
+    DOUBLE          reduce using rule 106 (empty -> .)
+    FLOAT           reduce using rule 106 (empty -> .)
+    STRING          reduce using rule 106 (empty -> .)
+    CHAR            reduce using rule 106 (empty -> .)
+    VOID            reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+
+    static_exist                   shift and go to state 19
+    empty                          shift and go to state 21
+
+state 13
+
+    (17) declare_type_exist -> declare_type .
+
+    STATIC          reduce using rule 17 (declare_type_exist -> declare_type .)
+    INT             reduce using rule 17 (declare_type_exist -> declare_type .)
+    BOOLEAN         reduce using rule 17 (declare_type_exist -> declare_type .)
+    DOUBLE          reduce using rule 17 (declare_type_exist -> declare_type .)
+    FLOAT           reduce using rule 17 (declare_type_exist -> declare_type .)
+    STRING          reduce using rule 17 (declare_type_exist -> declare_type .)
+    CHAR            reduce using rule 17 (declare_type_exist -> declare_type .)
+    VOID            reduce using rule 17 (declare_type_exist -> declare_type .)
+    ID              reduce using rule 17 (declare_type_exist -> declare_type .)
+
+
+state 14
+
+    (19) declare_type -> PUBLIC .
+
+    STATIC          reduce using rule 19 (declare_type -> PUBLIC .)
+    INT             reduce using rule 19 (declare_type -> PUBLIC .)
+    BOOLEAN         reduce using rule 19 (declare_type -> PUBLIC .)
+    DOUBLE          reduce using rule 19 (declare_type -> PUBLIC .)
+    FLOAT           reduce using rule 19 (declare_type -> PUBLIC .)
+    STRING          reduce using rule 19 (declare_type -> PUBLIC .)
+    CHAR            reduce using rule 19 (declare_type -> PUBLIC .)
+    VOID            reduce using rule 19 (declare_type -> PUBLIC .)
+    ID              reduce using rule 19 (declare_type -> PUBLIC .)
+
+
+state 15
+
+    (20) declare_type -> PRIVATE .
+
+    STATIC          reduce using rule 20 (declare_type -> PRIVATE .)
+    INT             reduce using rule 20 (declare_type -> PRIVATE .)
+    BOOLEAN         reduce using rule 20 (declare_type -> PRIVATE .)
+    DOUBLE          reduce using rule 20 (declare_type -> PRIVATE .)
+    FLOAT           reduce using rule 20 (declare_type -> PRIVATE .)
+    STRING          reduce using rule 20 (declare_type -> PRIVATE .)
+    CHAR            reduce using rule 20 (declare_type -> PRIVATE .)
+    VOID            reduce using rule 20 (declare_type -> PRIVATE .)
+    ID              reduce using rule 20 (declare_type -> PRIVATE .)
+
+
+state 16
+
+    (2) class_declaration -> CLASS ID LEFT_BRACE list RIGHT_BRACE .
+
+    $end            reduce using rule 2 (class_declaration -> CLASS ID LEFT_BRACE list RIGHT_BRACE .)
+
+
+state 17
+
+    (3) list -> declration_list list .
+
+    RIGHT_BRACE     reduce using rule 3 (list -> declration_list list .)
+
+
+state 18
+
+    (7) field_declaration -> declarators ID . SEMICOLON
+    (8) method_declaration -> declarators ID . OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+
+    SEMICOLON       shift and go to state 22
+    OPEN_PAR        shift and go to state 23
+
+
+state 19
+
+    (16) declarators -> declare_type_exist static_exist . type
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    ID              shift and go to state 35
+
+    type                           shift and go to state 24
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    arr_typed                      shift and go to state 36
+
+state 20
+
+    (21) static_exist -> STATIC .
+
+    INT             reduce using rule 21 (static_exist -> STATIC .)
+    BOOLEAN         reduce using rule 21 (static_exist -> STATIC .)
+    DOUBLE          reduce using rule 21 (static_exist -> STATIC .)
+    FLOAT           reduce using rule 21 (static_exist -> STATIC .)
+    STRING          reduce using rule 21 (static_exist -> STATIC .)
+    CHAR            reduce using rule 21 (static_exist -> STATIC .)
+    VOID            reduce using rule 21 (static_exist -> STATIC .)
+    ID              reduce using rule 21 (static_exist -> STATIC .)
+
+
+state 21
+
+    (22) static_exist -> empty .
+
+    INT             reduce using rule 22 (static_exist -> empty .)
+    BOOLEAN         reduce using rule 22 (static_exist -> empty .)
+    DOUBLE          reduce using rule 22 (static_exist -> empty .)
+    FLOAT           reduce using rule 22 (static_exist -> empty .)
+    STRING          reduce using rule 22 (static_exist -> empty .)
+    CHAR            reduce using rule 22 (static_exist -> empty .)
+    VOID            reduce using rule 22 (static_exist -> empty .)
+    ID              reduce using rule 22 (static_exist -> empty .)
+
+
+state 22
+
+    (7) field_declaration -> declarators ID SEMICOLON .
+
+    PUBLIC          reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    PRIVATE         reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    STATIC          reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    INT             reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    BOOLEAN         reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    DOUBLE          reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    FLOAT           reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    STRING          reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    CHAR            reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    VOID            reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    ID              reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+    RIGHT_BRACE     reduce using rule 7 (field_declaration -> declarators ID SEMICOLON .)
+
+
+state 23
+
+    (8) method_declaration -> declarators ID OPEN_PAR . inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+    (9) inside_method_exp -> . parameter_list
+    (10) inside_method_exp -> . empty
+    (38) parameter_list -> . type ID inputt
+    (106) empty -> .
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    ID              shift and go to state 35
+
+    inside_method_exp              shift and go to state 37
+    parameter_list                 shift and go to state 38
+    empty                          shift and go to state 39
+    type                           shift and go to state 40
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    arr_typed                      shift and go to state 36
+
+state 24
+
+    (16) declarators -> declare_type_exist static_exist type .
+
+    ID              reduce using rule 16 (declarators -> declare_type_exist static_exist type .)
+
+
+state 25
+
+    (23) type -> prim_type .
+
+    ID              reduce using rule 23 (type -> prim_type .)
+
+
+state 26
+
+    (24) type -> class_type .
+    (37) arr_typed -> class_type .
+
+    ID              reduce using rule 24 (type -> class_type .)
+    LBRACKET        reduce using rule 37 (arr_typed -> class_type .)
+
+
+state 27
+
+    (25) type -> arr_type .
+
+    ID              reduce using rule 25 (type -> arr_type .)
+
+
+state 28
+
+    (26) prim_type -> INT .
+    (36) arr_typed -> INT .
+
+    ID              reduce using rule 26 (prim_type -> INT .)
+    LBRACKET        reduce using rule 36 (arr_typed -> INT .)
+
+
+state 29
+
+    (27) prim_type -> BOOLEAN .
+
+    ID              reduce using rule 27 (prim_type -> BOOLEAN .)
+
+
+state 30
+
+    (28) prim_type -> DOUBLE .
+
+    ID              reduce using rule 28 (prim_type -> DOUBLE .)
+
+
+state 31
+
+    (29) prim_type -> FLOAT .
+
+    ID              reduce using rule 29 (prim_type -> FLOAT .)
+
+
+state 32
+
+    (30) prim_type -> STRING .
+
+    ID              reduce using rule 30 (prim_type -> STRING .)
+
+
+state 33
+
+    (31) prim_type -> CHAR .
+
+    ID              reduce using rule 31 (prim_type -> CHAR .)
+
+
+state 34
+
+    (32) prim_type -> VOID .
+
+    ID              reduce using rule 32 (prim_type -> VOID .)
+
+
+state 35
+
+    (33) class_type -> ID .
+
+    ID              reduce using rule 33 (class_type -> ID .)
+    LBRACKET        reduce using rule 33 (class_type -> ID .)
+
+
+state 36
+
+    (34) arr_type -> arr_typed . LBRACKET RBRACKET
+    (35) arr_type -> arr_typed . LBRACKET NUMBER RBRACKET
+
+    LBRACKET        shift and go to state 41
+
+
+state 37
+
+    (8) method_declaration -> declarators ID OPEN_PAR inside_method_exp . CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE
+
+    CLOSE_PAR       shift and go to state 42
+
+
+state 38
+
+    (9) inside_method_exp -> parameter_list .
+
+    CLOSE_PAR       reduce using rule 9 (inside_method_exp -> parameter_list .)
+
+
+state 39
+
+    (10) inside_method_exp -> empty .
+
+    CLOSE_PAR       reduce using rule 10 (inside_method_exp -> empty .)
+
+
+state 40
+
+    (38) parameter_list -> type . ID inputt
+
+    ID              shift and go to state 43
+
+
+state 41
+
+    (34) arr_type -> arr_typed LBRACKET . RBRACKET
+    (35) arr_type -> arr_typed LBRACKET . NUMBER RBRACKET
+
+    RBRACKET        shift and go to state 44
+    NUMBER          shift and go to state 45
+
+
+state 42
+
+    (8) method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR . LEFT_BRACE inside_method_st RIGHT_BRACE
+
+    LEFT_BRACE      shift and go to state 46
+
+
+state 43
+
+    (38) parameter_list -> type ID . inputt
+    (39) inputt -> . input inputt
+    (40) inputt -> . empty
+    (41) input -> . COMMAS type ID
+    (106) empty -> .
+
+    COMMAS          shift and go to state 50
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+
+    inputt                         shift and go to state 47
+    input                          shift and go to state 48
+    empty                          shift and go to state 49
+
+state 44
+
+    (34) arr_type -> arr_typed LBRACKET RBRACKET .
+
+    ID              reduce using rule 34 (arr_type -> arr_typed LBRACKET RBRACKET .)
+
+
+state 45
+
+    (35) arr_type -> arr_typed LBRACKET NUMBER . RBRACKET
+
+    RBRACKET        shift and go to state 51
+
+
+state 46
+
+    (8) method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE . inside_method_st RIGHT_BRACE
+    (11) inside_method_st -> . statment_exist return_exist
+    (12) statment_exist -> . statment_loop
+    (13) statment_exist -> . empty
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (106) empty -> .
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    RETURN          reduce using rule 106 (empty -> .)
+    RIGHT_BRACE     reduce using rule 106 (empty -> .)
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    inside_method_st               shift and go to state 53
+    statment_exist                 shift and go to state 54
+    statment_loop                  shift and go to state 55
+    empty                          shift and go to state 56
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 47
+
+    (38) parameter_list -> type ID inputt .
+
+    CLOSE_PAR       reduce using rule 38 (parameter_list -> type ID inputt .)
+
+
+state 48
+
+    (39) inputt -> input . inputt
+    (39) inputt -> . input inputt
+    (40) inputt -> . empty
+    (41) input -> . COMMAS type ID
+    (106) empty -> .
+
+    COMMAS          shift and go to state 50
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+
+    input                          shift and go to state 48
+    inputt                         shift and go to state 70
+    empty                          shift and go to state 49
+
+state 49
+
+    (40) inputt -> empty .
+
+    CLOSE_PAR       reduce using rule 40 (inputt -> empty .)
+
+
+state 50
+
+    (41) input -> COMMAS . type ID
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    ID              shift and go to state 35
+
+    type                           shift and go to state 71
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    arr_typed                      shift and go to state 36
+
+state 51
+
+    (35) arr_type -> arr_typed LBRACKET NUMBER RBRACKET .
+
+    ID              reduce using rule 35 (arr_type -> arr_typed LBRACKET NUMBER RBRACKET .)
+
+
+state 52
+
+    (50) assign -> ID . EQUAL_OP expresstion SEMICOLON
+    (33) class_type -> ID .
+    (60) half_reference -> ID .
+
+  ! reduce/reduce conflict for LBRACKET resolved using rule 33 (class_type -> ID .)
+  ! reduce/reduce conflict for ID resolved using rule 33 (class_type -> ID .)
+    EQUAL_OP        shift and go to state 72
+    ID              reduce using rule 33 (class_type -> ID .)
+    LBRACKET        reduce using rule 33 (class_type -> ID .)
+    DOT             reduce using rule 60 (half_reference -> ID .)
+    OPEN_PAR        reduce using rule 60 (half_reference -> ID .)
+    NUMBER          reduce using rule 60 (half_reference -> ID .)
+    TRUE_BOOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    FALSE_BOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    INT             reduce using rule 60 (half_reference -> ID .)
+    NEW             reduce using rule 60 (half_reference -> ID .)
+    MINUS           reduce using rule 60 (half_reference -> ID .)
+    THIS            reduce using rule 60 (half_reference -> ID .)
+
+  ! LBRACKET        [ reduce using rule 60 (half_reference -> ID .) ]
+  ! ID              [ reduce using rule 60 (half_reference -> ID .) ]
+
+
+state 53
+
+    (8) method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st . RIGHT_BRACE
+
+    RIGHT_BRACE     shift and go to state 73
+
+
+state 54
+
+    (11) inside_method_st -> statment_exist . return_exist
+    (14) return_exist -> . RETURN expresstion SEMICOLON
+    (15) return_exist -> . empty
+    (106) empty -> .
+
+    RETURN          shift and go to state 75
+    RIGHT_BRACE     reduce using rule 106 (empty -> .)
+
+    return_exist                   shift and go to state 74
+    empty                          shift and go to state 76
+
+state 55
+
+    (12) statment_exist -> statment_loop .
+
+    RETURN          reduce using rule 12 (statment_exist -> statment_loop .)
+    RIGHT_BRACE     reduce using rule 12 (statment_exist -> statment_loop .)
+
+
+state 56
+
+    (13) statment_exist -> empty .
+
+    RETURN          reduce using rule 13 (statment_exist -> empty .)
+    RIGHT_BRACE     reduce using rule 13 (statment_exist -> empty .)
+
+
+state 57
+
+    (42) statment_loop -> statment . statment_loop
+    (43) statment_loop -> statment .
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for BOOLEAN resolved as shift
+  ! shift/reduce conflict for DOUBLE resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for STRING resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for VOID resolved as shift
+  ! shift/reduce conflict for THIS resolved as shift
+    RETURN          reduce using rule 43 (statment_loop -> statment .)
+    RIGHT_BRACE     reduce using rule 43 (statment_loop -> statment .)
+    ELSE            reduce using rule 43 (statment_loop -> statment .)
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+  ! IF              [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! WHILE           [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! ID              [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! INT             [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! BOOLEAN         [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! DOUBLE          [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! FLOAT           [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! STRING          [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! CHAR            [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! VOID            [ reduce using rule 43 (statment_loop -> statment .) ]
+  ! THIS            [ reduce using rule 43 (statment_loop -> statment .) ]
+
+    statment                       shift and go to state 57
+    statment_loop                  shift and go to state 77
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 58
+
+    (44) statment -> if_statment .
+
+    IF              reduce using rule 44 (statment -> if_statment .)
+    WHILE           reduce using rule 44 (statment -> if_statment .)
+    ID              reduce using rule 44 (statment -> if_statment .)
+    INT             reduce using rule 44 (statment -> if_statment .)
+    BOOLEAN         reduce using rule 44 (statment -> if_statment .)
+    DOUBLE          reduce using rule 44 (statment -> if_statment .)
+    FLOAT           reduce using rule 44 (statment -> if_statment .)
+    STRING          reduce using rule 44 (statment -> if_statment .)
+    CHAR            reduce using rule 44 (statment -> if_statment .)
+    VOID            reduce using rule 44 (statment -> if_statment .)
+    THIS            reduce using rule 44 (statment -> if_statment .)
+    RETURN          reduce using rule 44 (statment -> if_statment .)
+    RIGHT_BRACE     reduce using rule 44 (statment -> if_statment .)
+    ELSE            reduce using rule 44 (statment -> if_statment .)
+
+
+state 59
+
+    (45) statment -> while_statment .
+
+    IF              reduce using rule 45 (statment -> while_statment .)
+    WHILE           reduce using rule 45 (statment -> while_statment .)
+    ID              reduce using rule 45 (statment -> while_statment .)
+    INT             reduce using rule 45 (statment -> while_statment .)
+    BOOLEAN         reduce using rule 45 (statment -> while_statment .)
+    DOUBLE          reduce using rule 45 (statment -> while_statment .)
+    FLOAT           reduce using rule 45 (statment -> while_statment .)
+    STRING          reduce using rule 45 (statment -> while_statment .)
+    CHAR            reduce using rule 45 (statment -> while_statment .)
+    VOID            reduce using rule 45 (statment -> while_statment .)
+    THIS            reduce using rule 45 (statment -> while_statment .)
+    RETURN          reduce using rule 45 (statment -> while_statment .)
+    RIGHT_BRACE     reduce using rule 45 (statment -> while_statment .)
+    ELSE            reduce using rule 45 (statment -> while_statment .)
+
+
+state 60
+
+    (46) statment -> declare_var .
+
+    IF              reduce using rule 46 (statment -> declare_var .)
+    WHILE           reduce using rule 46 (statment -> declare_var .)
+    ID              reduce using rule 46 (statment -> declare_var .)
+    INT             reduce using rule 46 (statment -> declare_var .)
+    BOOLEAN         reduce using rule 46 (statment -> declare_var .)
+    DOUBLE          reduce using rule 46 (statment -> declare_var .)
+    FLOAT           reduce using rule 46 (statment -> declare_var .)
+    STRING          reduce using rule 46 (statment -> declare_var .)
+    CHAR            reduce using rule 46 (statment -> declare_var .)
+    VOID            reduce using rule 46 (statment -> declare_var .)
+    THIS            reduce using rule 46 (statment -> declare_var .)
+    RETURN          reduce using rule 46 (statment -> declare_var .)
+    RIGHT_BRACE     reduce using rule 46 (statment -> declare_var .)
+    ELSE            reduce using rule 46 (statment -> declare_var .)
+
+
+state 61
+
+    (47) statment -> call_function .
+
+    IF              reduce using rule 47 (statment -> call_function .)
+    WHILE           reduce using rule 47 (statment -> call_function .)
+    ID              reduce using rule 47 (statment -> call_function .)
+    INT             reduce using rule 47 (statment -> call_function .)
+    BOOLEAN         reduce using rule 47 (statment -> call_function .)
+    DOUBLE          reduce using rule 47 (statment -> call_function .)
+    FLOAT           reduce using rule 47 (statment -> call_function .)
+    STRING          reduce using rule 47 (statment -> call_function .)
+    CHAR            reduce using rule 47 (statment -> call_function .)
+    VOID            reduce using rule 47 (statment -> call_function .)
+    THIS            reduce using rule 47 (statment -> call_function .)
+    RETURN          reduce using rule 47 (statment -> call_function .)
+    RIGHT_BRACE     reduce using rule 47 (statment -> call_function .)
+    ELSE            reduce using rule 47 (statment -> call_function .)
+
+
+state 62
+
+    (48) statment -> define_arr .
+
+    IF              reduce using rule 48 (statment -> define_arr .)
+    WHILE           reduce using rule 48 (statment -> define_arr .)
+    ID              reduce using rule 48 (statment -> define_arr .)
+    INT             reduce using rule 48 (statment -> define_arr .)
+    BOOLEAN         reduce using rule 48 (statment -> define_arr .)
+    DOUBLE          reduce using rule 48 (statment -> define_arr .)
+    FLOAT           reduce using rule 48 (statment -> define_arr .)
+    STRING          reduce using rule 48 (statment -> define_arr .)
+    CHAR            reduce using rule 48 (statment -> define_arr .)
+    VOID            reduce using rule 48 (statment -> define_arr .)
+    THIS            reduce using rule 48 (statment -> define_arr .)
+    RETURN          reduce using rule 48 (statment -> define_arr .)
+    RIGHT_BRACE     reduce using rule 48 (statment -> define_arr .)
+    ELSE            reduce using rule 48 (statment -> define_arr .)
+
+
+state 63
+
+    (49) statment -> assign .
+
+    IF              reduce using rule 49 (statment -> assign .)
+    WHILE           reduce using rule 49 (statment -> assign .)
+    ID              reduce using rule 49 (statment -> assign .)
+    INT             reduce using rule 49 (statment -> assign .)
+    BOOLEAN         reduce using rule 49 (statment -> assign .)
+    DOUBLE          reduce using rule 49 (statment -> assign .)
+    FLOAT           reduce using rule 49 (statment -> assign .)
+    STRING          reduce using rule 49 (statment -> assign .)
+    CHAR            reduce using rule 49 (statment -> assign .)
+    VOID            reduce using rule 49 (statment -> assign .)
+    THIS            reduce using rule 49 (statment -> assign .)
+    RETURN          reduce using rule 49 (statment -> assign .)
+    RIGHT_BRACE     reduce using rule 49 (statment -> assign .)
+    ELSE            reduce using rule 49 (statment -> assign .)
+
+
+state 64
+
+    (51) if_statment -> IF . OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> IF . OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> IF . OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> IF . OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+
+    OPEN_PAR        shift and go to state 78
+
+
+state 65
+
+    (55) while_statment -> WHILE . OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> WHILE . OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+
+    OPEN_PAR        shift and go to state 79
+
+
+state 66
+
+    (57) declare_var -> type . ID EQUAL_OP expresstion SEMICOLON
+
+    ID              shift and go to state 80
+
+
+state 67
+
+    (72) call_function -> reference . OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> reference . exist_exp_arr expresstion SEMICOLON
+    (75) exist_exp_arr -> . exp_arr
+    (76) exist_exp_arr -> . empty
+    (77) exp_arr -> . LBRACKET expresstion RBRACKET
+    (106) empty -> .
+
+  ! shift/reduce conflict for OPEN_PAR resolved as shift
+    OPEN_PAR        shift and go to state 81
+    LBRACKET        shift and go to state 85
+    NUMBER          reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+    TRUE_BOOOLEAN   reduce using rule 106 (empty -> .)
+    FALSE_BOOLEAN   reduce using rule 106 (empty -> .)
+    INT             reduce using rule 106 (empty -> .)
+    NEW             reduce using rule 106 (empty -> .)
+    MINUS           reduce using rule 106 (empty -> .)
+    THIS            reduce using rule 106 (empty -> .)
+
+  ! OPEN_PAR        [ reduce using rule 106 (empty -> .) ]
+
+    exist_exp_arr                  shift and go to state 82
+    exp_arr                        shift and go to state 83
+    empty                          shift and go to state 84
+
+state 68
+
+    (58) reference -> half_reference . exist_id
+    (61) exist_id -> . id_loop
+    (62) exist_id -> . empty
+    (63) id_loop -> . DOT ID reference
+    (64) id_loop -> . empty
+    (106) empty -> .
+
+    DOT             shift and go to state 89
+    OPEN_PAR        reduce using rule 106 (empty -> .)
+    LBRACKET        reduce using rule 106 (empty -> .)
+    NUMBER          reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+    TRUE_BOOOLEAN   reduce using rule 106 (empty -> .)
+    FALSE_BOOLEAN   reduce using rule 106 (empty -> .)
+    INT             reduce using rule 106 (empty -> .)
+    NEW             reduce using rule 106 (empty -> .)
+    MINUS           reduce using rule 106 (empty -> .)
+    THIS            reduce using rule 106 (empty -> .)
+
+    exist_id                       shift and go to state 86
+    id_loop                        shift and go to state 87
+    empty                          shift and go to state 88
+
+state 69
+
+    (59) half_reference -> THIS .
+
+    DOT             reduce using rule 59 (half_reference -> THIS .)
+    OPEN_PAR        reduce using rule 59 (half_reference -> THIS .)
+    LBRACKET        reduce using rule 59 (half_reference -> THIS .)
+    NUMBER          reduce using rule 59 (half_reference -> THIS .)
+    ID              reduce using rule 59 (half_reference -> THIS .)
+    TRUE_BOOOLEAN   reduce using rule 59 (half_reference -> THIS .)
+    FALSE_BOOLEAN   reduce using rule 59 (half_reference -> THIS .)
+    INT             reduce using rule 59 (half_reference -> THIS .)
+    NEW             reduce using rule 59 (half_reference -> THIS .)
+    MINUS           reduce using rule 59 (half_reference -> THIS .)
+    THIS            reduce using rule 59 (half_reference -> THIS .)
+
+
+state 70
+
+    (39) inputt -> input inputt .
+
+    CLOSE_PAR       reduce using rule 39 (inputt -> input inputt .)
+
+
+state 71
+
+    (41) input -> COMMAS type . ID
+
+    ID              shift and go to state 90
+
+
+state 72
+
+    (50) assign -> ID EQUAL_OP . expresstion SEMICOLON
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 92
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 73
+
+    (8) method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .
+
+    PUBLIC          reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    PRIVATE         reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    STATIC          reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    INT             reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    BOOLEAN         reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    DOUBLE          reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    FLOAT           reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    STRING          reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    CHAR            reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    VOID            reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    ID              reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+    RIGHT_BRACE     reduce using rule 8 (method_declaration -> declarators ID OPEN_PAR inside_method_exp CLOSE_PAR LEFT_BRACE inside_method_st RIGHT_BRACE .)
+
+
+state 74
+
+    (11) inside_method_st -> statment_exist return_exist .
+
+    RIGHT_BRACE     reduce using rule 11 (inside_method_st -> statment_exist return_exist .)
+
+
+state 75
+
+    (14) return_exist -> RETURN . expresstion SEMICOLON
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 102
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 76
+
+    (15) return_exist -> empty .
+
+    RIGHT_BRACE     reduce using rule 15 (return_exist -> empty .)
+
+
+state 77
+
+    (42) statment_loop -> statment statment_loop .
+
+    RETURN          reduce using rule 42 (statment_loop -> statment statment_loop .)
+    RIGHT_BRACE     reduce using rule 42 (statment_loop -> statment statment_loop .)
+    ELSE            reduce using rule 42 (statment_loop -> statment statment_loop .)
+    IF              reduce using rule 42 (statment_loop -> statment statment_loop .)
+    WHILE           reduce using rule 42 (statment_loop -> statment statment_loop .)
+    ID              reduce using rule 42 (statment_loop -> statment statment_loop .)
+    INT             reduce using rule 42 (statment_loop -> statment statment_loop .)
+    BOOLEAN         reduce using rule 42 (statment_loop -> statment statment_loop .)
+    DOUBLE          reduce using rule 42 (statment_loop -> statment statment_loop .)
+    FLOAT           reduce using rule 42 (statment_loop -> statment statment_loop .)
+    STRING          reduce using rule 42 (statment_loop -> statment statment_loop .)
+    CHAR            reduce using rule 42 (statment_loop -> statment statment_loop .)
+    VOID            reduce using rule 42 (statment_loop -> statment statment_loop .)
+    THIS            reduce using rule 42 (statment_loop -> statment statment_loop .)
+
+
+state 78
+
+    (51) if_statment -> IF OPEN_PAR . expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> IF OPEN_PAR . expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> IF OPEN_PAR . expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> IF OPEN_PAR . expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 103
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 79
+
+    (55) while_statment -> WHILE OPEN_PAR . expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> WHILE OPEN_PAR . expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 104
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 80
+
+    (57) declare_var -> type ID . EQUAL_OP expresstion SEMICOLON
+
+    EQUAL_OP        shift and go to state 105
+
+
+state 81
+
+    (72) call_function -> reference OPEN_PAR . argument_exist CLOSE_PAR SEMICOLON
+    (65) argument_exist -> . argument_list
+    (66) argument_exist -> . empty
+    (67) argument_list -> . expresstion argument_list_exist
+    (106) empty -> .
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    reference                      shift and go to state 93
+    argument_exist                 shift and go to state 106
+    argument_list                  shift and go to state 107
+    empty                          shift and go to state 108
+    expresstion                    shift and go to state 109
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 82
+
+    (74) define_arr -> reference exist_exp_arr . expresstion SEMICOLON
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    reference                      shift and go to state 93
+    expresstion                    shift and go to state 110
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 83
+
+    (75) exist_exp_arr -> exp_arr .
+
+    OPEN_PAR        reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    NUMBER          reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    ID              reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    TRUE_BOOOLEAN   reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    FALSE_BOOLEAN   reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    INT             reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    NEW             reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    MINUS           reduce using rule 75 (exist_exp_arr -> exp_arr .)
+    THIS            reduce using rule 75 (exist_exp_arr -> exp_arr .)
+
+
+state 84
+
+    (76) exist_exp_arr -> empty .
+
+    OPEN_PAR        reduce using rule 76 (exist_exp_arr -> empty .)
+    NUMBER          reduce using rule 76 (exist_exp_arr -> empty .)
+    ID              reduce using rule 76 (exist_exp_arr -> empty .)
+    TRUE_BOOOLEAN   reduce using rule 76 (exist_exp_arr -> empty .)
+    FALSE_BOOLEAN   reduce using rule 76 (exist_exp_arr -> empty .)
+    INT             reduce using rule 76 (exist_exp_arr -> empty .)
+    NEW             reduce using rule 76 (exist_exp_arr -> empty .)
+    MINUS           reduce using rule 76 (exist_exp_arr -> empty .)
+    THIS            reduce using rule 76 (exist_exp_arr -> empty .)
+
+
+state 85
+
+    (77) exp_arr -> LBRACKET . expresstion RBRACKET
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 111
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 86
+
+    (58) reference -> half_reference exist_id .
+
+    OPEN_PAR        reduce using rule 58 (reference -> half_reference exist_id .)
+    LBRACKET        reduce using rule 58 (reference -> half_reference exist_id .)
+    NUMBER          reduce using rule 58 (reference -> half_reference exist_id .)
+    ID              reduce using rule 58 (reference -> half_reference exist_id .)
+    TRUE_BOOOLEAN   reduce using rule 58 (reference -> half_reference exist_id .)
+    FALSE_BOOLEAN   reduce using rule 58 (reference -> half_reference exist_id .)
+    INT             reduce using rule 58 (reference -> half_reference exist_id .)
+    NEW             reduce using rule 58 (reference -> half_reference exist_id .)
+    MINUS           reduce using rule 58 (reference -> half_reference exist_id .)
+    THIS            reduce using rule 58 (reference -> half_reference exist_id .)
+
+
+state 87
+
+    (61) exist_id -> id_loop .
+
+    OPEN_PAR        reduce using rule 61 (exist_id -> id_loop .)
+    LBRACKET        reduce using rule 61 (exist_id -> id_loop .)
+    NUMBER          reduce using rule 61 (exist_id -> id_loop .)
+    ID              reduce using rule 61 (exist_id -> id_loop .)
+    TRUE_BOOOLEAN   reduce using rule 61 (exist_id -> id_loop .)
+    FALSE_BOOLEAN   reduce using rule 61 (exist_id -> id_loop .)
+    INT             reduce using rule 61 (exist_id -> id_loop .)
+    NEW             reduce using rule 61 (exist_id -> id_loop .)
+    MINUS           reduce using rule 61 (exist_id -> id_loop .)
+    THIS            reduce using rule 61 (exist_id -> id_loop .)
+
+
+state 88
+
+    (62) exist_id -> empty .
+    (64) id_loop -> empty .
+
+  ! reduce/reduce conflict for OPEN_PAR resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for LBRACKET resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for NUMBER resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for ID resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for TRUE_BOOOLEAN resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for FALSE_BOOLEAN resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for INT resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for NEW resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for MINUS resolved using rule 62 (exist_id -> empty .)
+  ! reduce/reduce conflict for THIS resolved using rule 62 (exist_id -> empty .)
+    OPEN_PAR        reduce using rule 62 (exist_id -> empty .)
+    LBRACKET        reduce using rule 62 (exist_id -> empty .)
+    NUMBER          reduce using rule 62 (exist_id -> empty .)
+    ID              reduce using rule 62 (exist_id -> empty .)
+    TRUE_BOOOLEAN   reduce using rule 62 (exist_id -> empty .)
+    FALSE_BOOLEAN   reduce using rule 62 (exist_id -> empty .)
+    INT             reduce using rule 62 (exist_id -> empty .)
+    NEW             reduce using rule 62 (exist_id -> empty .)
+    MINUS           reduce using rule 62 (exist_id -> empty .)
+    THIS            reduce using rule 62 (exist_id -> empty .)
+
+  ! OPEN_PAR        [ reduce using rule 64 (id_loop -> empty .) ]
+  ! LBRACKET        [ reduce using rule 64 (id_loop -> empty .) ]
+  ! NUMBER          [ reduce using rule 64 (id_loop -> empty .) ]
+  ! ID              [ reduce using rule 64 (id_loop -> empty .) ]
+  ! TRUE_BOOOLEAN   [ reduce using rule 64 (id_loop -> empty .) ]
+  ! FALSE_BOOLEAN   [ reduce using rule 64 (id_loop -> empty .) ]
+  ! INT             [ reduce using rule 64 (id_loop -> empty .) ]
+  ! NEW             [ reduce using rule 64 (id_loop -> empty .) ]
+  ! MINUS           [ reduce using rule 64 (id_loop -> empty .) ]
+  ! THIS            [ reduce using rule 64 (id_loop -> empty .) ]
+
+
+state 89
+
+    (63) id_loop -> DOT . ID reference
+
+    ID              shift and go to state 112
+
+
+state 90
+
+    (41) input -> COMMAS type ID .
+
+    COMMAS          reduce using rule 41 (input -> COMMAS type ID .)
+    CLOSE_PAR       reduce using rule 41 (input -> COMMAS type ID .)
+
+
+state 91
+
+    (97) expresstion -> ID .
+    (101) expresstion -> ID . LBRACKET expresstion RBRACKET
+    (60) half_reference -> ID .
+
+  ! shift/reduce conflict for LBRACKET resolved as shift
+  ! reduce/reduce conflict for MINUS resolved using rule 60 (half_reference -> ID .)
+    SEMICOLON       reduce using rule 97 (expresstion -> ID .)
+    PLUS            reduce using rule 97 (expresstion -> ID .)
+    TIMES           reduce using rule 97 (expresstion -> ID .)
+    DIVIDE          reduce using rule 97 (expresstion -> ID .)
+    MODULUS         reduce using rule 97 (expresstion -> ID .)
+    ASSIGN_OP       reduce using rule 97 (expresstion -> ID .)
+    LOGICAL_AND     reduce using rule 97 (expresstion -> ID .)
+    LOGICAL_OR      reduce using rule 97 (expresstion -> ID .)
+    GREATER_THAN    reduce using rule 97 (expresstion -> ID .)
+    LESS_THAN       reduce using rule 97 (expresstion -> ID .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 97 (expresstion -> ID .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 97 (expresstion -> ID .)
+    DECREMENT       reduce using rule 97 (expresstion -> ID .)
+    INCREMENT       reduce using rule 97 (expresstion -> ID .)
+    CLOSE_PAR       reduce using rule 97 (expresstion -> ID .)
+    COMMAS          reduce using rule 97 (expresstion -> ID .)
+    RBRACKET        reduce using rule 97 (expresstion -> ID .)
+    LBRACKET        shift and go to state 113
+    DOT             reduce using rule 60 (half_reference -> ID .)
+    OPEN_PAR        reduce using rule 60 (half_reference -> ID .)
+    NUMBER          reduce using rule 60 (half_reference -> ID .)
+    ID              reduce using rule 60 (half_reference -> ID .)
+    TRUE_BOOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    FALSE_BOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    INT             reduce using rule 60 (half_reference -> ID .)
+    NEW             reduce using rule 60 (half_reference -> ID .)
+    MINUS           reduce using rule 60 (half_reference -> ID .)
+    THIS            reduce using rule 60 (half_reference -> ID .)
+
+  ! MINUS           [ reduce using rule 97 (expresstion -> ID .) ]
+  ! LBRACKET        [ reduce using rule 60 (half_reference -> ID .) ]
+
+
+state 92
+
+    (50) assign -> ID EQUAL_OP expresstion . SEMICOLON
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    SEMICOLON       shift and go to state 114
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 93
+
+    (93) expresstion -> reference . exist_exp_arr expresstion
+    (94) expresstion -> reference . OPEN_PAR argument_exist CLOSE_PAR
+    (75) exist_exp_arr -> . exp_arr
+    (76) exist_exp_arr -> . empty
+    (77) exp_arr -> . LBRACKET expresstion RBRACKET
+    (106) empty -> .
+
+  ! shift/reduce conflict for OPEN_PAR resolved as shift
+    OPEN_PAR        shift and go to state 132
+    LBRACKET        shift and go to state 85
+    NUMBER          reduce using rule 106 (empty -> .)
+    ID              reduce using rule 106 (empty -> .)
+    TRUE_BOOOLEAN   reduce using rule 106 (empty -> .)
+    FALSE_BOOLEAN   reduce using rule 106 (empty -> .)
+    INT             reduce using rule 106 (empty -> .)
+    NEW             reduce using rule 106 (empty -> .)
+    MINUS           reduce using rule 106 (empty -> .)
+    THIS            reduce using rule 106 (empty -> .)
+
+  ! OPEN_PAR        [ reduce using rule 106 (empty -> .) ]
+
+    exist_exp_arr                  shift and go to state 131
+    exp_arr                        shift and go to state 83
+    empty                          shift and go to state 84
+
+state 94
+
+    (95) expresstion -> OPEN_PAR . expresstion CLOSE_PAR
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 133
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 95
+
+    (96) expresstion -> NUMBER .
+
+    SEMICOLON       reduce using rule 96 (expresstion -> NUMBER .)
+    PLUS            reduce using rule 96 (expresstion -> NUMBER .)
+    MINUS           reduce using rule 96 (expresstion -> NUMBER .)
+    TIMES           reduce using rule 96 (expresstion -> NUMBER .)
+    DIVIDE          reduce using rule 96 (expresstion -> NUMBER .)
+    MODULUS         reduce using rule 96 (expresstion -> NUMBER .)
+    ASSIGN_OP       reduce using rule 96 (expresstion -> NUMBER .)
+    LOGICAL_AND     reduce using rule 96 (expresstion -> NUMBER .)
+    LOGICAL_OR      reduce using rule 96 (expresstion -> NUMBER .)
+    GREATER_THAN    reduce using rule 96 (expresstion -> NUMBER .)
+    LESS_THAN       reduce using rule 96 (expresstion -> NUMBER .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 96 (expresstion -> NUMBER .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 96 (expresstion -> NUMBER .)
+    DECREMENT       reduce using rule 96 (expresstion -> NUMBER .)
+    INCREMENT       reduce using rule 96 (expresstion -> NUMBER .)
+    CLOSE_PAR       reduce using rule 96 (expresstion -> NUMBER .)
+    COMMAS          reduce using rule 96 (expresstion -> NUMBER .)
+    RBRACKET        reduce using rule 96 (expresstion -> NUMBER .)
+
+
+state 96
+
+    (98) expresstion -> TRUE_BOOOLEAN .
+
+    SEMICOLON       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    PLUS            reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    MINUS           reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    TIMES           reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    DIVIDE          reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    MODULUS         reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    ASSIGN_OP       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    LOGICAL_AND     reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    LOGICAL_OR      reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    GREATER_THAN    reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    LESS_THAN       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    DECREMENT       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    INCREMENT       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    CLOSE_PAR       reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    COMMAS          reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+    RBRACKET        reduce using rule 98 (expresstion -> TRUE_BOOOLEAN .)
+
+
+state 97
+
+    (99) expresstion -> FALSE_BOOLEAN .
+
+    SEMICOLON       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    PLUS            reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    MINUS           reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    TIMES           reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    DIVIDE          reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    MODULUS         reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    ASSIGN_OP       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    LOGICAL_AND     reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    LOGICAL_OR      reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    GREATER_THAN    reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    LESS_THAN       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    DECREMENT       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    INCREMENT       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    CLOSE_PAR       reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    COMMAS          reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+    RBRACKET        reduce using rule 99 (expresstion -> FALSE_BOOLEAN .)
+
+
+state 98
+
+    (100) expresstion -> INT . LBRACKET expresstion RBRACKET
+
+    LBRACKET        shift and go to state 134
+
+
+state 99
+
+    (103) expresstion -> unop . expresstion
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    unop                           shift and go to state 99
+    expresstion                    shift and go to state 135
+    reference                      shift and go to state 93
+    half_reference                 shift and go to state 68
+
+state 100
+
+    (105) expresstion -> NEW . ID OPEN_PAR CLOSE_PAR
+
+    ID              shift and go to state 136
+
+
+state 101
+
+    (90) unop -> MINUS .
+
+    OPEN_PAR        reduce using rule 90 (unop -> MINUS .)
+    NUMBER          reduce using rule 90 (unop -> MINUS .)
+    ID              reduce using rule 90 (unop -> MINUS .)
+    TRUE_BOOOLEAN   reduce using rule 90 (unop -> MINUS .)
+    FALSE_BOOLEAN   reduce using rule 90 (unop -> MINUS .)
+    INT             reduce using rule 90 (unop -> MINUS .)
+    NEW             reduce using rule 90 (unop -> MINUS .)
+    MINUS           reduce using rule 90 (unop -> MINUS .)
+    THIS            reduce using rule 90 (unop -> MINUS .)
+
+
+state 102
+
+    (14) return_exist -> RETURN expresstion . SEMICOLON
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    SEMICOLON       shift and go to state 137
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 103
+
+    (51) if_statment -> IF OPEN_PAR expresstion . CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> IF OPEN_PAR expresstion . CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> IF OPEN_PAR expresstion . CLOSE_PAR statment_loop
+    (54) if_statment -> IF OPEN_PAR expresstion . CLOSE_PAR statment_loop ELSE statment_loop
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    CLOSE_PAR       shift and go to state 138
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 104
+
+    (55) while_statment -> WHILE OPEN_PAR expresstion . CLOSE_PAR statment_loop
+    (56) while_statment -> WHILE OPEN_PAR expresstion . CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    CLOSE_PAR       shift and go to state 139
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 105
+
+    (57) declare_var -> type ID EQUAL_OP . expresstion SEMICOLON
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 140
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 106
+
+    (72) call_function -> reference OPEN_PAR argument_exist . CLOSE_PAR SEMICOLON
+
+    CLOSE_PAR       shift and go to state 141
+
+
+state 107
+
+    (65) argument_exist -> argument_list .
+
+    CLOSE_PAR       reduce using rule 65 (argument_exist -> argument_list .)
+
+
+state 108
+
+    (66) argument_exist -> empty .
+
+    CLOSE_PAR       reduce using rule 66 (argument_exist -> empty .)
+
+
+state 109
+
+    (67) argument_list -> expresstion . argument_list_exist
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (68) argument_list_exist -> . argument_list_loop
+    (69) argument_list_exist -> . empty
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+    (70) argument_list_loop -> . COMMAS expresstion argument_list_loop
+    (71) argument_list_loop -> . empty
+    (106) empty -> .
+
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+    COMMAS          shift and go to state 145
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+
+    argument_list_exist            shift and go to state 142
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+    argument_list_loop             shift and go to state 143
+    empty                          shift and go to state 144
+
+state 110
+
+    (74) define_arr -> reference exist_exp_arr expresstion . SEMICOLON
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    SEMICOLON       shift and go to state 146
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 111
+
+    (77) exp_arr -> LBRACKET expresstion . RBRACKET
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    RBRACKET        shift and go to state 147
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 112
+
+    (63) id_loop -> DOT ID . reference
+    (58) reference -> . half_reference exist_id
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    THIS            shift and go to state 69
+    ID              shift and go to state 148
+
+    reference                      shift and go to state 149
+    half_reference                 shift and go to state 68
+
+state 113
+
+    (101) expresstion -> ID LBRACKET . expresstion RBRACKET
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 150
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 114
+
+    (50) assign -> ID EQUAL_OP expresstion SEMICOLON .
+
+    IF              reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    WHILE           reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    ID              reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    INT             reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    BOOLEAN         reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    DOUBLE          reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    FLOAT           reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    STRING          reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    CHAR            reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    VOID            reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    THIS            reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    RETURN          reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    RIGHT_BRACE     reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+    ELSE            reduce using rule 50 (assign -> ID EQUAL_OP expresstion SEMICOLON .)
+
+
+state 115
+
+    (102) expresstion -> expresstion binop . expresstion
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 151
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 116
+
+    (104) expresstion -> expresstion anop .
+
+    SEMICOLON       reduce using rule 104 (expresstion -> expresstion anop .)
+    PLUS            reduce using rule 104 (expresstion -> expresstion anop .)
+    MINUS           reduce using rule 104 (expresstion -> expresstion anop .)
+    TIMES           reduce using rule 104 (expresstion -> expresstion anop .)
+    DIVIDE          reduce using rule 104 (expresstion -> expresstion anop .)
+    MODULUS         reduce using rule 104 (expresstion -> expresstion anop .)
+    ASSIGN_OP       reduce using rule 104 (expresstion -> expresstion anop .)
+    LOGICAL_AND     reduce using rule 104 (expresstion -> expresstion anop .)
+    LOGICAL_OR      reduce using rule 104 (expresstion -> expresstion anop .)
+    GREATER_THAN    reduce using rule 104 (expresstion -> expresstion anop .)
+    LESS_THAN       reduce using rule 104 (expresstion -> expresstion anop .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 104 (expresstion -> expresstion anop .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 104 (expresstion -> expresstion anop .)
+    DECREMENT       reduce using rule 104 (expresstion -> expresstion anop .)
+    INCREMENT       reduce using rule 104 (expresstion -> expresstion anop .)
+    CLOSE_PAR       reduce using rule 104 (expresstion -> expresstion anop .)
+    COMMAS          reduce using rule 104 (expresstion -> expresstion anop .)
+    RBRACKET        reduce using rule 104 (expresstion -> expresstion anop .)
+
+
+state 117
+
+    (78) binop -> PLUS .
+
+    OPEN_PAR        reduce using rule 78 (binop -> PLUS .)
+    NUMBER          reduce using rule 78 (binop -> PLUS .)
+    ID              reduce using rule 78 (binop -> PLUS .)
+    TRUE_BOOOLEAN   reduce using rule 78 (binop -> PLUS .)
+    FALSE_BOOLEAN   reduce using rule 78 (binop -> PLUS .)
+    INT             reduce using rule 78 (binop -> PLUS .)
+    NEW             reduce using rule 78 (binop -> PLUS .)
+    MINUS           reduce using rule 78 (binop -> PLUS .)
+    THIS            reduce using rule 78 (binop -> PLUS .)
+
+
+state 118
+
+    (79) binop -> MINUS .
+
+    OPEN_PAR        reduce using rule 79 (binop -> MINUS .)
+    NUMBER          reduce using rule 79 (binop -> MINUS .)
+    ID              reduce using rule 79 (binop -> MINUS .)
+    TRUE_BOOOLEAN   reduce using rule 79 (binop -> MINUS .)
+    FALSE_BOOLEAN   reduce using rule 79 (binop -> MINUS .)
+    INT             reduce using rule 79 (binop -> MINUS .)
+    NEW             reduce using rule 79 (binop -> MINUS .)
+    MINUS           reduce using rule 79 (binop -> MINUS .)
+    THIS            reduce using rule 79 (binop -> MINUS .)
+
+
+state 119
+
+    (80) binop -> TIMES .
+
+    OPEN_PAR        reduce using rule 80 (binop -> TIMES .)
+    NUMBER          reduce using rule 80 (binop -> TIMES .)
+    ID              reduce using rule 80 (binop -> TIMES .)
+    TRUE_BOOOLEAN   reduce using rule 80 (binop -> TIMES .)
+    FALSE_BOOLEAN   reduce using rule 80 (binop -> TIMES .)
+    INT             reduce using rule 80 (binop -> TIMES .)
+    NEW             reduce using rule 80 (binop -> TIMES .)
+    MINUS           reduce using rule 80 (binop -> TIMES .)
+    THIS            reduce using rule 80 (binop -> TIMES .)
+
+
+state 120
+
+    (81) binop -> DIVIDE .
+
+    OPEN_PAR        reduce using rule 81 (binop -> DIVIDE .)
+    NUMBER          reduce using rule 81 (binop -> DIVIDE .)
+    ID              reduce using rule 81 (binop -> DIVIDE .)
+    TRUE_BOOOLEAN   reduce using rule 81 (binop -> DIVIDE .)
+    FALSE_BOOLEAN   reduce using rule 81 (binop -> DIVIDE .)
+    INT             reduce using rule 81 (binop -> DIVIDE .)
+    NEW             reduce using rule 81 (binop -> DIVIDE .)
+    MINUS           reduce using rule 81 (binop -> DIVIDE .)
+    THIS            reduce using rule 81 (binop -> DIVIDE .)
+
+
+state 121
+
+    (82) binop -> MODULUS .
+
+    OPEN_PAR        reduce using rule 82 (binop -> MODULUS .)
+    NUMBER          reduce using rule 82 (binop -> MODULUS .)
+    ID              reduce using rule 82 (binop -> MODULUS .)
+    TRUE_BOOOLEAN   reduce using rule 82 (binop -> MODULUS .)
+    FALSE_BOOLEAN   reduce using rule 82 (binop -> MODULUS .)
+    INT             reduce using rule 82 (binop -> MODULUS .)
+    NEW             reduce using rule 82 (binop -> MODULUS .)
+    MINUS           reduce using rule 82 (binop -> MODULUS .)
+    THIS            reduce using rule 82 (binop -> MODULUS .)
+
+
+state 122
+
+    (83) binop -> ASSIGN_OP .
+
+    OPEN_PAR        reduce using rule 83 (binop -> ASSIGN_OP .)
+    NUMBER          reduce using rule 83 (binop -> ASSIGN_OP .)
+    ID              reduce using rule 83 (binop -> ASSIGN_OP .)
+    TRUE_BOOOLEAN   reduce using rule 83 (binop -> ASSIGN_OP .)
+    FALSE_BOOLEAN   reduce using rule 83 (binop -> ASSIGN_OP .)
+    INT             reduce using rule 83 (binop -> ASSIGN_OP .)
+    NEW             reduce using rule 83 (binop -> ASSIGN_OP .)
+    MINUS           reduce using rule 83 (binop -> ASSIGN_OP .)
+    THIS            reduce using rule 83 (binop -> ASSIGN_OP .)
+
+
+state 123
+
+    (84) binop -> LOGICAL_AND .
+
+    OPEN_PAR        reduce using rule 84 (binop -> LOGICAL_AND .)
+    NUMBER          reduce using rule 84 (binop -> LOGICAL_AND .)
+    ID              reduce using rule 84 (binop -> LOGICAL_AND .)
+    TRUE_BOOOLEAN   reduce using rule 84 (binop -> LOGICAL_AND .)
+    FALSE_BOOLEAN   reduce using rule 84 (binop -> LOGICAL_AND .)
+    INT             reduce using rule 84 (binop -> LOGICAL_AND .)
+    NEW             reduce using rule 84 (binop -> LOGICAL_AND .)
+    MINUS           reduce using rule 84 (binop -> LOGICAL_AND .)
+    THIS            reduce using rule 84 (binop -> LOGICAL_AND .)
+
+
+state 124
+
+    (85) binop -> LOGICAL_OR .
+
+    OPEN_PAR        reduce using rule 85 (binop -> LOGICAL_OR .)
+    NUMBER          reduce using rule 85 (binop -> LOGICAL_OR .)
+    ID              reduce using rule 85 (binop -> LOGICAL_OR .)
+    TRUE_BOOOLEAN   reduce using rule 85 (binop -> LOGICAL_OR .)
+    FALSE_BOOLEAN   reduce using rule 85 (binop -> LOGICAL_OR .)
+    INT             reduce using rule 85 (binop -> LOGICAL_OR .)
+    NEW             reduce using rule 85 (binop -> LOGICAL_OR .)
+    MINUS           reduce using rule 85 (binop -> LOGICAL_OR .)
+    THIS            reduce using rule 85 (binop -> LOGICAL_OR .)
+
+
+state 125
+
+    (86) binop -> GREATER_THAN .
+
+    OPEN_PAR        reduce using rule 86 (binop -> GREATER_THAN .)
+    NUMBER          reduce using rule 86 (binop -> GREATER_THAN .)
+    ID              reduce using rule 86 (binop -> GREATER_THAN .)
+    TRUE_BOOOLEAN   reduce using rule 86 (binop -> GREATER_THAN .)
+    FALSE_BOOLEAN   reduce using rule 86 (binop -> GREATER_THAN .)
+    INT             reduce using rule 86 (binop -> GREATER_THAN .)
+    NEW             reduce using rule 86 (binop -> GREATER_THAN .)
+    MINUS           reduce using rule 86 (binop -> GREATER_THAN .)
+    THIS            reduce using rule 86 (binop -> GREATER_THAN .)
+
+
+state 126
+
+    (87) binop -> LESS_THAN .
+
+    OPEN_PAR        reduce using rule 87 (binop -> LESS_THAN .)
+    NUMBER          reduce using rule 87 (binop -> LESS_THAN .)
+    ID              reduce using rule 87 (binop -> LESS_THAN .)
+    TRUE_BOOOLEAN   reduce using rule 87 (binop -> LESS_THAN .)
+    FALSE_BOOLEAN   reduce using rule 87 (binop -> LESS_THAN .)
+    INT             reduce using rule 87 (binop -> LESS_THAN .)
+    NEW             reduce using rule 87 (binop -> LESS_THAN .)
+    MINUS           reduce using rule 87 (binop -> LESS_THAN .)
+    THIS            reduce using rule 87 (binop -> LESS_THAN .)
+
+
+state 127
+
+    (88) binop -> GREATER_THAN_OR_EQUAL_TO .
+
+    OPEN_PAR        reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    NUMBER          reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    ID              reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    TRUE_BOOOLEAN   reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    FALSE_BOOLEAN   reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    INT             reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    NEW             reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    MINUS           reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+    THIS            reduce using rule 88 (binop -> GREATER_THAN_OR_EQUAL_TO .)
+
+
+state 128
+
+    (89) binop -> LESS_THAN_OR_EQUAL_TO .
+
+    OPEN_PAR        reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    NUMBER          reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    ID              reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    TRUE_BOOOLEAN   reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    FALSE_BOOLEAN   reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    INT             reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    NEW             reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    MINUS           reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+    THIS            reduce using rule 89 (binop -> LESS_THAN_OR_EQUAL_TO .)
+
+
+state 129
+
+    (91) anop -> DECREMENT .
+
+    SEMICOLON       reduce using rule 91 (anop -> DECREMENT .)
+    PLUS            reduce using rule 91 (anop -> DECREMENT .)
+    MINUS           reduce using rule 91 (anop -> DECREMENT .)
+    TIMES           reduce using rule 91 (anop -> DECREMENT .)
+    DIVIDE          reduce using rule 91 (anop -> DECREMENT .)
+    MODULUS         reduce using rule 91 (anop -> DECREMENT .)
+    ASSIGN_OP       reduce using rule 91 (anop -> DECREMENT .)
+    LOGICAL_AND     reduce using rule 91 (anop -> DECREMENT .)
+    LOGICAL_OR      reduce using rule 91 (anop -> DECREMENT .)
+    GREATER_THAN    reduce using rule 91 (anop -> DECREMENT .)
+    LESS_THAN       reduce using rule 91 (anop -> DECREMENT .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 91 (anop -> DECREMENT .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 91 (anop -> DECREMENT .)
+    DECREMENT       reduce using rule 91 (anop -> DECREMENT .)
+    INCREMENT       reduce using rule 91 (anop -> DECREMENT .)
+    CLOSE_PAR       reduce using rule 91 (anop -> DECREMENT .)
+    COMMAS          reduce using rule 91 (anop -> DECREMENT .)
+    RBRACKET        reduce using rule 91 (anop -> DECREMENT .)
+
+
+state 130
+
+    (92) anop -> INCREMENT .
+
+    SEMICOLON       reduce using rule 92 (anop -> INCREMENT .)
+    PLUS            reduce using rule 92 (anop -> INCREMENT .)
+    MINUS           reduce using rule 92 (anop -> INCREMENT .)
+    TIMES           reduce using rule 92 (anop -> INCREMENT .)
+    DIVIDE          reduce using rule 92 (anop -> INCREMENT .)
+    MODULUS         reduce using rule 92 (anop -> INCREMENT .)
+    ASSIGN_OP       reduce using rule 92 (anop -> INCREMENT .)
+    LOGICAL_AND     reduce using rule 92 (anop -> INCREMENT .)
+    LOGICAL_OR      reduce using rule 92 (anop -> INCREMENT .)
+    GREATER_THAN    reduce using rule 92 (anop -> INCREMENT .)
+    LESS_THAN       reduce using rule 92 (anop -> INCREMENT .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 92 (anop -> INCREMENT .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 92 (anop -> INCREMENT .)
+    DECREMENT       reduce using rule 92 (anop -> INCREMENT .)
+    INCREMENT       reduce using rule 92 (anop -> INCREMENT .)
+    CLOSE_PAR       reduce using rule 92 (anop -> INCREMENT .)
+    COMMAS          reduce using rule 92 (anop -> INCREMENT .)
+    RBRACKET        reduce using rule 92 (anop -> INCREMENT .)
+
+
+state 131
+
+    (93) expresstion -> reference exist_exp_arr . expresstion
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    reference                      shift and go to state 93
+    expresstion                    shift and go to state 152
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 132
+
+    (94) expresstion -> reference OPEN_PAR . argument_exist CLOSE_PAR
+    (65) argument_exist -> . argument_list
+    (66) argument_exist -> . empty
+    (67) argument_list -> . expresstion argument_list_exist
+    (106) empty -> .
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    reference                      shift and go to state 93
+    argument_exist                 shift and go to state 153
+    argument_list                  shift and go to state 107
+    empty                          shift and go to state 108
+    expresstion                    shift and go to state 109
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 133
+
+    (95) expresstion -> OPEN_PAR expresstion . CLOSE_PAR
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    CLOSE_PAR       shift and go to state 154
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 134
+
+    (100) expresstion -> INT LBRACKET . expresstion RBRACKET
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 155
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 135
+
+    (103) expresstion -> unop expresstion .
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULUS resolved as shift
+  ! shift/reduce conflict for ASSIGN_OP resolved as shift
+  ! shift/reduce conflict for LOGICAL_AND resolved as shift
+  ! shift/reduce conflict for LOGICAL_OR resolved as shift
+  ! shift/reduce conflict for GREATER_THAN resolved as shift
+  ! shift/reduce conflict for LESS_THAN resolved as shift
+  ! shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for LESS_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for DECREMENT resolved as shift
+  ! shift/reduce conflict for INCREMENT resolved as shift
+    SEMICOLON       reduce using rule 103 (expresstion -> unop expresstion .)
+    CLOSE_PAR       reduce using rule 103 (expresstion -> unop expresstion .)
+    COMMAS          reduce using rule 103 (expresstion -> unop expresstion .)
+    RBRACKET        reduce using rule 103 (expresstion -> unop expresstion .)
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+  ! PLUS            [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! MINUS           [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! TIMES           [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! DIVIDE          [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! MODULUS         [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! ASSIGN_OP       [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! LOGICAL_AND     [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! LOGICAL_OR      [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! GREATER_THAN    [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! LESS_THAN       [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! GREATER_THAN_OR_EQUAL_TO [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! LESS_THAN_OR_EQUAL_TO [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! DECREMENT       [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+  ! INCREMENT       [ reduce using rule 103 (expresstion -> unop expresstion .) ]
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 136
+
+    (105) expresstion -> NEW ID . OPEN_PAR CLOSE_PAR
+
+    OPEN_PAR        shift and go to state 156
+
+
+state 137
+
+    (14) return_exist -> RETURN expresstion SEMICOLON .
+
+    RIGHT_BRACE     reduce using rule 14 (return_exist -> RETURN expresstion SEMICOLON .)
+
+
+state 138
+
+    (51) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR . LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR . LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR . statment_loop
+    (54) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR . statment_loop ELSE statment_loop
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    LEFT_BRACE      shift and go to state 157
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 158
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 139
+
+    (55) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR . statment_loop
+    (56) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR . LEFT_BRACE statment_loop RIGHT_BRACE
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    LEFT_BRACE      shift and go to state 160
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 159
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 140
+
+    (57) declare_var -> type ID EQUAL_OP expresstion . SEMICOLON
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    SEMICOLON       shift and go to state 161
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 141
+
+    (72) call_function -> reference OPEN_PAR argument_exist CLOSE_PAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 162
+
+
+state 142
+
+    (67) argument_list -> expresstion argument_list_exist .
+
+    CLOSE_PAR       reduce using rule 67 (argument_list -> expresstion argument_list_exist .)
+
+
+state 143
+
+    (68) argument_list_exist -> argument_list_loop .
+
+    CLOSE_PAR       reduce using rule 68 (argument_list_exist -> argument_list_loop .)
+
+
+state 144
+
+    (69) argument_list_exist -> empty .
+    (71) argument_list_loop -> empty .
+
+  ! reduce/reduce conflict for CLOSE_PAR resolved using rule 69 (argument_list_exist -> empty .)
+    CLOSE_PAR       reduce using rule 69 (argument_list_exist -> empty .)
+
+  ! CLOSE_PAR       [ reduce using rule 71 (argument_list_loop -> empty .) ]
+
+
+state 145
+
+    (70) argument_list_loop -> COMMAS . expresstion argument_list_loop
+    (93) expresstion -> . reference exist_exp_arr expresstion
+    (94) expresstion -> . reference OPEN_PAR argument_exist CLOSE_PAR
+    (95) expresstion -> . OPEN_PAR expresstion CLOSE_PAR
+    (96) expresstion -> . NUMBER
+    (97) expresstion -> . ID
+    (98) expresstion -> . TRUE_BOOOLEAN
+    (99) expresstion -> . FALSE_BOOLEAN
+    (100) expresstion -> . INT LBRACKET expresstion RBRACKET
+    (101) expresstion -> . ID LBRACKET expresstion RBRACKET
+    (102) expresstion -> . expresstion binop expresstion
+    (103) expresstion -> . unop expresstion
+    (104) expresstion -> . expresstion anop
+    (105) expresstion -> . NEW ID OPEN_PAR CLOSE_PAR
+    (58) reference -> . half_reference exist_id
+    (90) unop -> . MINUS
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+
+    OPEN_PAR        shift and go to state 94
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 91
+    TRUE_BOOOLEAN   shift and go to state 96
+    FALSE_BOOLEAN   shift and go to state 97
+    INT             shift and go to state 98
+    NEW             shift and go to state 100
+    MINUS           shift and go to state 101
+    THIS            shift and go to state 69
+
+    expresstion                    shift and go to state 163
+    reference                      shift and go to state 93
+    unop                           shift and go to state 99
+    half_reference                 shift and go to state 68
+
+state 146
+
+    (74) define_arr -> reference exist_exp_arr expresstion SEMICOLON .
+
+    IF              reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    WHILE           reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    ID              reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    INT             reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    BOOLEAN         reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    DOUBLE          reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    FLOAT           reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    STRING          reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    CHAR            reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    VOID            reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    THIS            reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    RETURN          reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    RIGHT_BRACE     reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+    ELSE            reduce using rule 74 (define_arr -> reference exist_exp_arr expresstion SEMICOLON .)
+
+
+state 147
+
+    (77) exp_arr -> LBRACKET expresstion RBRACKET .
+
+    OPEN_PAR        reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    NUMBER          reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    ID              reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    TRUE_BOOOLEAN   reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    FALSE_BOOLEAN   reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    INT             reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    NEW             reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    MINUS           reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+    THIS            reduce using rule 77 (exp_arr -> LBRACKET expresstion RBRACKET .)
+
+
+state 148
+
+    (60) half_reference -> ID .
+
+    DOT             reduce using rule 60 (half_reference -> ID .)
+    OPEN_PAR        reduce using rule 60 (half_reference -> ID .)
+    LBRACKET        reduce using rule 60 (half_reference -> ID .)
+    NUMBER          reduce using rule 60 (half_reference -> ID .)
+    ID              reduce using rule 60 (half_reference -> ID .)
+    TRUE_BOOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    FALSE_BOOLEAN   reduce using rule 60 (half_reference -> ID .)
+    INT             reduce using rule 60 (half_reference -> ID .)
+    NEW             reduce using rule 60 (half_reference -> ID .)
+    MINUS           reduce using rule 60 (half_reference -> ID .)
+    THIS            reduce using rule 60 (half_reference -> ID .)
+
+
+state 149
+
+    (63) id_loop -> DOT ID reference .
+
+    OPEN_PAR        reduce using rule 63 (id_loop -> DOT ID reference .)
+    LBRACKET        reduce using rule 63 (id_loop -> DOT ID reference .)
+    NUMBER          reduce using rule 63 (id_loop -> DOT ID reference .)
+    ID              reduce using rule 63 (id_loop -> DOT ID reference .)
+    TRUE_BOOOLEAN   reduce using rule 63 (id_loop -> DOT ID reference .)
+    FALSE_BOOLEAN   reduce using rule 63 (id_loop -> DOT ID reference .)
+    INT             reduce using rule 63 (id_loop -> DOT ID reference .)
+    NEW             reduce using rule 63 (id_loop -> DOT ID reference .)
+    MINUS           reduce using rule 63 (id_loop -> DOT ID reference .)
+    THIS            reduce using rule 63 (id_loop -> DOT ID reference .)
+
+
+state 150
+
+    (101) expresstion -> ID LBRACKET expresstion . RBRACKET
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    RBRACKET        shift and go to state 164
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 151
+
+    (102) expresstion -> expresstion binop expresstion .
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULUS resolved as shift
+  ! shift/reduce conflict for ASSIGN_OP resolved as shift
+  ! shift/reduce conflict for LOGICAL_AND resolved as shift
+  ! shift/reduce conflict for LOGICAL_OR resolved as shift
+  ! shift/reduce conflict for GREATER_THAN resolved as shift
+  ! shift/reduce conflict for LESS_THAN resolved as shift
+  ! shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for LESS_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for DECREMENT resolved as shift
+  ! shift/reduce conflict for INCREMENT resolved as shift
+    SEMICOLON       reduce using rule 102 (expresstion -> expresstion binop expresstion .)
+    CLOSE_PAR       reduce using rule 102 (expresstion -> expresstion binop expresstion .)
+    COMMAS          reduce using rule 102 (expresstion -> expresstion binop expresstion .)
+    RBRACKET        reduce using rule 102 (expresstion -> expresstion binop expresstion .)
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+  ! PLUS            [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! MINUS           [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! TIMES           [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! DIVIDE          [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! MODULUS         [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! ASSIGN_OP       [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! LOGICAL_AND     [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! LOGICAL_OR      [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! GREATER_THAN    [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! LESS_THAN       [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! GREATER_THAN_OR_EQUAL_TO [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! LESS_THAN_OR_EQUAL_TO [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! DECREMENT       [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+  ! INCREMENT       [ reduce using rule 102 (expresstion -> expresstion binop expresstion .) ]
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 152
+
+    (93) expresstion -> reference exist_exp_arr expresstion .
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULUS resolved as shift
+  ! shift/reduce conflict for ASSIGN_OP resolved as shift
+  ! shift/reduce conflict for LOGICAL_AND resolved as shift
+  ! shift/reduce conflict for LOGICAL_OR resolved as shift
+  ! shift/reduce conflict for GREATER_THAN resolved as shift
+  ! shift/reduce conflict for LESS_THAN resolved as shift
+  ! shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for LESS_THAN_OR_EQUAL_TO resolved as shift
+  ! shift/reduce conflict for DECREMENT resolved as shift
+  ! shift/reduce conflict for INCREMENT resolved as shift
+    SEMICOLON       reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .)
+    CLOSE_PAR       reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .)
+    COMMAS          reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .)
+    RBRACKET        reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .)
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+  ! PLUS            [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! MINUS           [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! TIMES           [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! DIVIDE          [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! MODULUS         [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! ASSIGN_OP       [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! LOGICAL_AND     [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! LOGICAL_OR      [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! GREATER_THAN    [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! LESS_THAN       [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! GREATER_THAN_OR_EQUAL_TO [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! LESS_THAN_OR_EQUAL_TO [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! DECREMENT       [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+  ! INCREMENT       [ reduce using rule 93 (expresstion -> reference exist_exp_arr expresstion .) ]
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 153
+
+    (94) expresstion -> reference OPEN_PAR argument_exist . CLOSE_PAR
+
+    CLOSE_PAR       shift and go to state 165
+
+
+state 154
+
+    (95) expresstion -> OPEN_PAR expresstion CLOSE_PAR .
+
+    SEMICOLON       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    PLUS            reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    MINUS           reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    TIMES           reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    DIVIDE          reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    MODULUS         reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    ASSIGN_OP       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    LOGICAL_AND     reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    LOGICAL_OR      reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    GREATER_THAN    reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    LESS_THAN       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    DECREMENT       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    INCREMENT       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    CLOSE_PAR       reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    COMMAS          reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+    RBRACKET        reduce using rule 95 (expresstion -> OPEN_PAR expresstion CLOSE_PAR .)
+
+
+state 155
+
+    (100) expresstion -> INT LBRACKET expresstion . RBRACKET
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+
+    RBRACKET        shift and go to state 166
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+
+state 156
+
+    (105) expresstion -> NEW ID OPEN_PAR . CLOSE_PAR
+
+    CLOSE_PAR       shift and go to state 167
+
+
+state 157
+
+    (51) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE . statment_loop RIGHT_BRACE
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE . statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 168
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 158
+
+    (53) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .
+    (54) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop . ELSE statment_loop
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    IF              reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    WHILE           reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    ID              reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    INT             reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    BOOLEAN         reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    DOUBLE          reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    FLOAT           reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    STRING          reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    CHAR            reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    VOID            reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    THIS            reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    RETURN          reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    RIGHT_BRACE     reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    ELSE            shift and go to state 169
+
+  ! ELSE            [ reduce using rule 53 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop .) ]
+
+
+state 159
+
+    (55) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .
+
+    IF              reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    WHILE           reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    ID              reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    INT             reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    BOOLEAN         reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    DOUBLE          reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    FLOAT           reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    STRING          reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    CHAR            reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    VOID            reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    THIS            reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    RETURN          reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    RIGHT_BRACE     reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+    ELSE            reduce using rule 55 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop .)
+
+
+state 160
+
+    (56) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE . statment_loop RIGHT_BRACE
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 170
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 161
+
+    (57) declare_var -> type ID EQUAL_OP expresstion SEMICOLON .
+
+    IF              reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    WHILE           reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    ID              reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    INT             reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    BOOLEAN         reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    DOUBLE          reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    FLOAT           reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    STRING          reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    CHAR            reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    VOID            reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    THIS            reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    RETURN          reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    RIGHT_BRACE     reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+    ELSE            reduce using rule 57 (declare_var -> type ID EQUAL_OP expresstion SEMICOLON .)
+
+
+state 162
+
+    (72) call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .
+
+    IF              reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    WHILE           reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    ID              reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    INT             reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    BOOLEAN         reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    DOUBLE          reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    FLOAT           reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    STRING          reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    CHAR            reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    VOID            reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    THIS            reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    RETURN          reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    RIGHT_BRACE     reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+    ELSE            reduce using rule 72 (call_function -> reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON .)
+
+
+state 163
+
+    (70) argument_list_loop -> COMMAS expresstion . argument_list_loop
+    (102) expresstion -> expresstion . binop expresstion
+    (104) expresstion -> expresstion . anop
+    (70) argument_list_loop -> . COMMAS expresstion argument_list_loop
+    (71) argument_list_loop -> . empty
+    (78) binop -> . PLUS
+    (79) binop -> . MINUS
+    (80) binop -> . TIMES
+    (81) binop -> . DIVIDE
+    (82) binop -> . MODULUS
+    (83) binop -> . ASSIGN_OP
+    (84) binop -> . LOGICAL_AND
+    (85) binop -> . LOGICAL_OR
+    (86) binop -> . GREATER_THAN
+    (87) binop -> . LESS_THAN
+    (88) binop -> . GREATER_THAN_OR_EQUAL_TO
+    (89) binop -> . LESS_THAN_OR_EQUAL_TO
+    (91) anop -> . DECREMENT
+    (92) anop -> . INCREMENT
+    (106) empty -> .
+
+    COMMAS          shift and go to state 145
+    PLUS            shift and go to state 117
+    MINUS           shift and go to state 118
+    TIMES           shift and go to state 119
+    DIVIDE          shift and go to state 120
+    MODULUS         shift and go to state 121
+    ASSIGN_OP       shift and go to state 122
+    LOGICAL_AND     shift and go to state 123
+    LOGICAL_OR      shift and go to state 124
+    GREATER_THAN    shift and go to state 125
+    LESS_THAN       shift and go to state 126
+    GREATER_THAN_OR_EQUAL_TO shift and go to state 127
+    LESS_THAN_OR_EQUAL_TO shift and go to state 128
+    DECREMENT       shift and go to state 129
+    INCREMENT       shift and go to state 130
+    CLOSE_PAR       reduce using rule 106 (empty -> .)
+
+    argument_list_loop             shift and go to state 171
+    binop                          shift and go to state 115
+    anop                           shift and go to state 116
+    empty                          shift and go to state 172
+
+state 164
+
+    (101) expresstion -> ID LBRACKET expresstion RBRACKET .
+
+    SEMICOLON       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    PLUS            reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    MINUS           reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    TIMES           reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    DIVIDE          reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    MODULUS         reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    ASSIGN_OP       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    LOGICAL_AND     reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    LOGICAL_OR      reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    GREATER_THAN    reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    LESS_THAN       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    DECREMENT       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    INCREMENT       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    CLOSE_PAR       reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    COMMAS          reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+    RBRACKET        reduce using rule 101 (expresstion -> ID LBRACKET expresstion RBRACKET .)
+
+
+state 165
+
+    (94) expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .
+
+    SEMICOLON       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    PLUS            reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    MINUS           reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    TIMES           reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    DIVIDE          reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    MODULUS         reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    ASSIGN_OP       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    LOGICAL_AND     reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    LOGICAL_OR      reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    GREATER_THAN    reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    LESS_THAN       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    DECREMENT       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    INCREMENT       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    CLOSE_PAR       reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    COMMAS          reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+    RBRACKET        reduce using rule 94 (expresstion -> reference OPEN_PAR argument_exist CLOSE_PAR .)
+
+
+state 166
+
+    (100) expresstion -> INT LBRACKET expresstion RBRACKET .
+
+    SEMICOLON       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    PLUS            reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    MINUS           reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    TIMES           reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    DIVIDE          reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    MODULUS         reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    ASSIGN_OP       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    LOGICAL_AND     reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    LOGICAL_OR      reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    GREATER_THAN    reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    LESS_THAN       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    DECREMENT       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    INCREMENT       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    CLOSE_PAR       reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    COMMAS          reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+    RBRACKET        reduce using rule 100 (expresstion -> INT LBRACKET expresstion RBRACKET .)
+
+
+state 167
+
+    (105) expresstion -> NEW ID OPEN_PAR CLOSE_PAR .
+
+    SEMICOLON       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    PLUS            reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    MINUS           reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    TIMES           reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    DIVIDE          reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    MODULUS         reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    ASSIGN_OP       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    LOGICAL_AND     reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    LOGICAL_OR      reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    GREATER_THAN    reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    LESS_THAN       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    GREATER_THAN_OR_EQUAL_TO reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    LESS_THAN_OR_EQUAL_TO reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    DECREMENT       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    INCREMENT       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    CLOSE_PAR       reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    COMMAS          reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+    RBRACKET        reduce using rule 105 (expresstion -> NEW ID OPEN_PAR CLOSE_PAR .)
+
+
+state 168
+
+    (51) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop . RIGHT_BRACE
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop . RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+
+    RIGHT_BRACE     shift and go to state 173
+
+
+state 169
+
+    (54) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE . statment_loop
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 174
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 170
+
+    (56) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop . RIGHT_BRACE
+
+    RIGHT_BRACE     shift and go to state 175
+
+
+state 171
+
+    (70) argument_list_loop -> COMMAS expresstion argument_list_loop .
+
+    CLOSE_PAR       reduce using rule 70 (argument_list_loop -> COMMAS expresstion argument_list_loop .)
+
+
+state 172
+
+    (71) argument_list_loop -> empty .
+
+    CLOSE_PAR       reduce using rule 71 (argument_list_loop -> empty .)
+
+
+state 173
+
+    (51) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE . ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    IF              reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    WHILE           reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ID              reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    INT             reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    BOOLEAN         reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    DOUBLE          reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    FLOAT           reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    STRING          reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    CHAR            reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    VOID            reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    THIS            reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RETURN          reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RIGHT_BRACE     reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ELSE            shift and go to state 176
+
+  ! ELSE            [ reduce using rule 51 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .) ]
+
+
+state 174
+
+    (54) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .
+
+    IF              reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    WHILE           reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    ID              reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    INT             reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    BOOLEAN         reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    DOUBLE          reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    FLOAT           reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    STRING          reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    CHAR            reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    VOID            reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    THIS            reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    RETURN          reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    RIGHT_BRACE     reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+    ELSE            reduce using rule 54 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop .)
+
+
+state 175
+
+    (56) while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .
+
+    IF              reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    WHILE           reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ID              reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    INT             reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    BOOLEAN         reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    DOUBLE          reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    FLOAT           reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    STRING          reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    CHAR            reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    VOID            reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    THIS            reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RETURN          reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RIGHT_BRACE     reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ELSE            reduce using rule 56 (while_statment -> WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE .)
+
+
+state 176
+
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE . LEFT_BRACE statment_loop RIGHT_BRACE
+
+    LEFT_BRACE      shift and go to state 177
+
+
+state 177
+
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE . statment_loop RIGHT_BRACE
+    (42) statment_loop -> . statment statment_loop
+    (43) statment_loop -> . statment
+    (44) statment -> . if_statment
+    (45) statment -> . while_statment
+    (46) statment -> . declare_var
+    (47) statment -> . call_function
+    (48) statment -> . define_arr
+    (49) statment -> . assign
+    (51) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (52) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE
+    (53) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (54) if_statment -> . IF OPEN_PAR expresstion CLOSE_PAR statment_loop ELSE statment_loop
+    (55) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR statment_loop
+    (56) while_statment -> . WHILE OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE
+    (57) declare_var -> . type ID EQUAL_OP expresstion SEMICOLON
+    (72) call_function -> . reference OPEN_PAR argument_exist CLOSE_PAR SEMICOLON
+    (74) define_arr -> . reference exist_exp_arr expresstion SEMICOLON
+    (50) assign -> . ID EQUAL_OP expresstion SEMICOLON
+    (23) type -> . prim_type
+    (24) type -> . class_type
+    (25) type -> . arr_type
+    (58) reference -> . half_reference exist_id
+    (26) prim_type -> . INT
+    (27) prim_type -> . BOOLEAN
+    (28) prim_type -> . DOUBLE
+    (29) prim_type -> . FLOAT
+    (30) prim_type -> . STRING
+    (31) prim_type -> . CHAR
+    (32) prim_type -> . VOID
+    (33) class_type -> . ID
+    (34) arr_type -> . arr_typed LBRACKET RBRACKET
+    (35) arr_type -> . arr_typed LBRACKET NUMBER RBRACKET
+    (59) half_reference -> . THIS
+    (60) half_reference -> . ID
+    (36) arr_typed -> . INT
+    (37) arr_typed -> . class_type
+
+    IF              shift and go to state 64
+    WHILE           shift and go to state 65
+    ID              shift and go to state 52
+    INT             shift and go to state 28
+    BOOLEAN         shift and go to state 29
+    DOUBLE          shift and go to state 30
+    FLOAT           shift and go to state 31
+    STRING          shift and go to state 32
+    CHAR            shift and go to state 33
+    VOID            shift and go to state 34
+    THIS            shift and go to state 69
+
+    statment_loop                  shift and go to state 178
+    statment                       shift and go to state 57
+    if_statment                    shift and go to state 58
+    while_statment                 shift and go to state 59
+    declare_var                    shift and go to state 60
+    call_function                  shift and go to state 61
+    define_arr                     shift and go to state 62
+    assign                         shift and go to state 63
+    type                           shift and go to state 66
+    reference                      shift and go to state 67
+    prim_type                      shift and go to state 25
+    class_type                     shift and go to state 26
+    arr_type                       shift and go to state 27
+    half_reference                 shift and go to state 68
+    arr_typed                      shift and go to state 36
+
+state 178
+
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop . RIGHT_BRACE
+
+    RIGHT_BRACE     shift and go to state 179
+
+
+state 179
+
+    (52) if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .
+
+    IF              reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    WHILE           reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ID              reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    INT             reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    BOOLEAN         reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    DOUBLE          reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    FLOAT           reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    STRING          reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    CHAR            reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    VOID            reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    THIS            reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RETURN          reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    RIGHT_BRACE     reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+    ELSE            reduce using rule 52 (if_statment -> IF OPEN_PAR expresstion CLOSE_PAR LEFT_BRACE statment_loop RIGHT_BRACE ELSE LEFT_BRACE statment_loop RIGHT_BRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IF in state 57 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 57 resolved as shift
+WARNING: shift/reduce conflict for ID in state 57 resolved as shift
+WARNING: shift/reduce conflict for INT in state 57 resolved as shift
+WARNING: shift/reduce conflict for BOOLEAN in state 57 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE in state 57 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 57 resolved as shift
+WARNING: shift/reduce conflict for STRING in state 57 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 57 resolved as shift
+WARNING: shift/reduce conflict for VOID in state 57 resolved as shift
+WARNING: shift/reduce conflict for THIS in state 57 resolved as shift
+WARNING: shift/reduce conflict for OPEN_PAR in state 67 resolved as shift
+WARNING: shift/reduce conflict for LBRACKET in state 91 resolved as shift
+WARNING: shift/reduce conflict for OPEN_PAR in state 93 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 135 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 135 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 135 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 135 resolved as shift
+WARNING: shift/reduce conflict for MODULUS in state 135 resolved as shift
+WARNING: shift/reduce conflict for ASSIGN_OP in state 135 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_AND in state 135 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_OR in state 135 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 135 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 135 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO in state 135 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUAL_TO in state 135 resolved as shift
+WARNING: shift/reduce conflict for DECREMENT in state 135 resolved as shift
+WARNING: shift/reduce conflict for INCREMENT in state 135 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 151 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 151 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 151 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 151 resolved as shift
+WARNING: shift/reduce conflict for MODULUS in state 151 resolved as shift
+WARNING: shift/reduce conflict for ASSIGN_OP in state 151 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_AND in state 151 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_OR in state 151 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 151 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 151 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO in state 151 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUAL_TO in state 151 resolved as shift
+WARNING: shift/reduce conflict for DECREMENT in state 151 resolved as shift
+WARNING: shift/reduce conflict for INCREMENT in state 151 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 152 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 152 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 152 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 152 resolved as shift
+WARNING: shift/reduce conflict for MODULUS in state 152 resolved as shift
+WARNING: shift/reduce conflict for ASSIGN_OP in state 152 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_AND in state 152 resolved as shift
+WARNING: shift/reduce conflict for LOGICAL_OR in state 152 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 152 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 152 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUAL_TO in state 152 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUAL_TO in state 152 resolved as shift
+WARNING: shift/reduce conflict for DECREMENT in state 152 resolved as shift
+WARNING: shift/reduce conflict for INCREMENT in state 152 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 158 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 173 resolved as shift
+WARNING: reduce/reduce conflict in state 52 resolved using rule (class_type -> ID)
+WARNING: rejected rule (half_reference -> ID) in state 52
+WARNING: reduce/reduce conflict in state 88 resolved using rule (exist_id -> empty)
+WARNING: rejected rule (id_loop -> empty) in state 88
+WARNING: reduce/reduce conflict in state 91 resolved using rule (half_reference -> ID)
+WARNING: rejected rule (expresstion -> ID) in state 91
+WARNING: reduce/reduce conflict in state 144 resolved using rule (argument_list_exist -> empty)
+WARNING: rejected rule (argument_list_loop -> empty) in state 144
+WARNING: Rule (id_loop -> empty) is never reduced
